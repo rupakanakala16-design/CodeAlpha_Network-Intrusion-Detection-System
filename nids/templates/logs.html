@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}System Logs{% endblock %}
+{% block page_title %}System Logs{% endblock %}
+{% block page_subtitle %}Raw event trail from the monitoring engine{% endblock %}
+
+{% block content %}
+
+<div class="glass section-card">
+  <div class="section-head">
+    <div>
+      <h3>Event Log</h3>
+      <p>Every action the simulated engine and analysts have taken</p>
+    </div>
+    <button class="btn btn-danger btn-sm" id="clearLogsBtn"><i class="fa-solid fa-broom"></i> Clear Demo Logs</button>
+  </div>
+
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" class="input" id="searchInput" placeholder="Search event or source...">
+    </div>
+    <select class="input" id="severityFilter">
+      <option value="all">All Severities</option>
+      <option value="INFO">Info</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="HIGH">High</option>
+      <option value="CRITICAL">Critical</option>
+    </select>
+  </div>
+
+  <div class="table-wrap">
+    <table class="nids-table">
+      <thead>
+        <tr><th>Timestamp</th><th>Event</th><th>Source</th><th>Severity</th><th>Status</th></tr>
+      </thead>
+      <tbody id="logsBody">
+        <tr><td colspan="5"><div class="skeleton" style="height:18px;"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/logs.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}NIDS{% endblock %} · Network Intrusion Detection System</title>
+
+<!-- Bootstrap 5 (grid + utility helpers only — visual language is custom) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Custom design system -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+<div class="app-shell">
+
+  <!-- ============================== SIDEBAR ============================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark"><i class="fa-solid fa-shield-halved"></i></div>
+      <div class="brand-text">
+        <div class="t1">NIDS Console</div>
+        <div class="t2">Simulated / Demo</div>
+      </div>
+    </div>
+
+    <div class="nav-group-label">Monitor</div>
+    <a href="{{ url_for('index') }}" class="nav-link {{ 'active' if active_page=='dashboard' else '' }}">
+      <i class="fa-solid fa-gauge-high"></i> Dashboard
+    </a>
+    <a href="{{ url_for('traffic_page') }}" class="nav-link {{ 'active' if active_page=='traffic' else '' }}">
+      <i class="fa-solid fa-network-wired"></i> Network Traffic
+    </a>
+    <a href="{{ url_for('alerts_page') }}" class="nav-link {{ 'active' if active_page=='alerts' else '' }}">
+      <i class="fa-solid fa-triangle-exclamation"></i> Security Alerts
+    </a>
+
+    <div class="nav-group-label">Configure</div>
+    <a href="{{ url_for('rules_page') }}" class="nav-link {{ 'active' if active_page=='rules' else '' }}">
+      <i class="fa-solid fa-list-check"></i> Detection Rules
+    </a>
+    <a href="{{ url_for('analytics_page') }}" class="nav-link {{ 'active' if active_page=='analytics' else '' }}">
+      <i class="fa-solid fa-chart-line"></i> Threat Analytics
+    </a>
+    <a href="{{ url_for('logs_page') }}" class="nav-link {{ 'active' if active_page=='logs' else '' }}">
+      <i class="fa-solid fa-terminal"></i> System Logs
+    </a>
+
+    <div class="nav-group-label">System</div>
+    <a href="{{ url_for('settings_page') }}" class="nav-link {{ 'active' if active_page=='settings' else '' }}">
+      <i class="fa-solid fa-sliders"></i> Settings
+    </a>
+    <a href="{{ url_for('about_page') }}" class="nav-link {{ 'active' if active_page=='about' else '' }}">
+      <i class="fa-solid fa-circle-info"></i> About Project
+    </a>
+
+    <div class="sidebar-footer">
+      <strong>Educational build.</strong> All traffic, alerts, and IPs shown are simulated demo data. No real network scanning is performed.
+    </div>
+  </aside>
+
+  <!-- ============================== MAIN ================================= -->
+  <main class="main">
+
+    <div class="topbar">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <button class="icon-btn menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-title">
+          <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+          <p>{% block page_subtitle %}Live overview of simulated network activity{% endblock %}</p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span class="status-pill" id="globalStatusPill">
+          <span class="dot-pulse"></span> <span id="globalStatusText">Monitoring Active</span>
+        </span>
+        <button class="icon-btn" title="Refresh" onclick="location.reload()"><i class="fa-solid fa-rotate"></i></button>
+      </div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+  </main>
+</div>
+
+<!-- Bootstrap bundle (for any utility JS components) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<!-- Shared app JS (sidebar toggle, global status polling) -->
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>

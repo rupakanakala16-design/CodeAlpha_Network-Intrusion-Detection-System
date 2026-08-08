@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block page_title %}Network Intrusion Detection System{% endblock %}
+{% block page_subtitle %}Live overview of simulated network activity{% endblock %}
+
+{% block content %}
+
+<div class="hero-grid">
+  <!-- Signature visual: rotating 3D radar sweep representing live simulated scanning -->
+  <div class="glass glass-hover radar-card">
+    <div class="radar-card-head">
+      <div>
+        <h3><i class="fa-solid fa-satellite-dish" style="color:var(--signal); margin-right:8px;"></i>Live Signal Sweep</h3>
+        <p>Simulated network scan — blips represent recent demo alert sources</p>
+      </div>
+      <span class="badge info"><i class="fa-solid fa-circle-nodes"></i> DEMO FEED</span>
+    </div>
+    <div class="radar-scene">
+      <div class="radar-dish" id="radarDish">
+        <div class="radar-ring r1"></div>
+        <div class="radar-ring r2"></div>
+        <div class="radar-ring r3"></div>
+        <div class="radar-crosshair"></div>
+        <div class="radar-sweep"></div>
+        <div id="radarBlips"></div>
+      </div>
+    </div>
+    <div class="radar-legend">
+      <span><i style="background:var(--low)"></i> Low</span>
+      <span><i style="background:var(--medium)"></i> Medium</span>
+      <span><i style="background:var(--high)"></i> High</span>
+      <span><i style="background:var(--critical)"></i> Critical</span>
+    </div>
+  </div>
+
+  <!-- System status -->
+  <div class="glass glass-hover status-card">
+    <div class="status-headline">
+      <div class="status-orb"><i class="fa-solid fa-satellite"></i></div>
+      <div>
+        <h4>System Monitoring</h4>
+        <p id="statusSub">All simulated sensors reporting normally</p>
+      </div>
+    </div>
+    <div class="mini-stat-row">
+      <div class="mini-stat">
+        <span class="label"><i class="fa-solid fa-clock"></i> Server Time</span>
+        <span class="value" id="serverTime">--:--:--</span>
+      </div>
+      <div class="mini-stat">
+        <span class="label"><i class="fa-solid fa-database"></i> Data Source</span>
+        <span class="value">Simulated Engine</span>
+      </div>
+      <div class="mini-stat">
+        <span class="label"><i class="fa-solid fa-shield"></i> Rules Active</span>
+        <span class="value" id="miniRulesActive">--</span>
+      </div>
+      <div class="mini-stat">
+        <span class="label"><i class="fa-solid fa-bolt"></i> Last Scan Tick</span>
+        <span class="value" id="lastTick">just now</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stat cards -->
+<div class="stat-grid">
+  <div class="glass glass-hover stat-card">
+    <div class="stat-top">
+      <div class="stat-icon cy"><i class="fa-solid fa-diagram-project"></i></div>
+      <span class="stat-trend"><i class="fa-solid fa-arrow-up"></i> live</span>
+    </div>
+    <div class="stat-value" id="statPackets">0</div>
+    <div class="stat-label">Packets Analyzed</div>
+  </div>
+  <div class="glass glass-hover stat-card">
+    <div class="stat-top">
+      <div class="stat-icon hi"><i class="fa-solid fa-bug"></i></div>
+      <span class="stat-trend down"><i class="fa-solid fa-arrow-up"></i> tracked</span>
+    </div>
+    <div class="stat-value" id="statThreats">0</div>
+    <div class="stat-label">Threats Detected</div>
+  </div>
+  <div class="glass glass-hover stat-card">
+    <div class="stat-top">
+      <div class="stat-icon cr"><i class="fa-solid fa-radiation"></i></div>
+      <span class="stat-trend down"><i class="fa-solid fa-arrow-up"></i> urgent</span>
+    </div>
+    <div class="stat-value" id="statCritical">0</div>
+    <div class="stat-label">Critical Alerts</div>
+  </div>
+  <div class="glass glass-hover stat-card">
+    <div class="stat-top">
+      <div class="stat-icon vi"><i class="fa-solid fa-list-check"></i></div>
+      <span class="stat-trend"><i class="fa-solid fa-check"></i> enabled</span>
+    </div>
+    <div class="stat-value" id="statRules">0</div>
+    <div class="stat-label">Active Rules</div>
+  </div>
+</div>
+
+<!-- Recent alerts -->
+<div class="glass section-card">
+  <div class="section-head">
+    <div>
+      <h3>Recent Alerts</h3>
+      <p>Most recent simulated detections from the engine</p>
+    </div>
+    <a href="{{ url_for('alerts_page') }}" class="link-chip">View all alerts <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+  <div class="table-wrap">
+    <table class="nids-table">
+      <thead>
+        <tr>
+          <th>Time</th><th>Source IP</th><th>Destination IP</th><th>Protocol</th>
+          <th>Alert Type</th><th>Severity</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="recentAlertsBody">
+        <tr><td colspan="7"><div class="skeleton" style="height:18px;"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

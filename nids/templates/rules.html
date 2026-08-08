@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Detection Rules{% endblock %}
+{% block page_title %}Detection Rules{% endblock %}
+{% block page_subtitle %}Configure what the simulated engine watches for{% endblock %}
+
+{% block content %}
+
+<div class="glass section-card">
+  <div class="section-head">
+    <div>
+      <h3>Rule Set</h3>
+      <p>Enable, edit, or add new safe detection rules</p>
+    </div>
+    <button class="btn btn-primary btn-sm" id="addRuleBtn"><i class="fa-solid fa-plus"></i> Add Rule</button>
+  </div>
+
+  <div class="table-wrap">
+    <table class="nids-table">
+      <thead>
+        <tr>
+          <th>Rule ID</th><th>Name</th><th>Description</th><th>Protocol</th>
+          <th>Severity</th><th>Status</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="rulesBody">
+        <tr><td colspan="7"><div class="skeleton" style="height:18px;"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Add / Edit rule modal -->
+<div class="modal-overlay" id="ruleModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="ruleModalTitle">Add Detection Rule</h3>
+      <button class="modal-close" id="ruleModalClose"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form id="ruleForm">
+      <input type="hidden" id="ruleId">
+      <div class="form-group">
+        <label>Rule Name</label>
+        <input type="text" class="input" id="ruleName" placeholder="e.g. Unusual DNS Query Rate" required>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="input" id="ruleDescription" placeholder="Describe the safe pattern this rule detects..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Protocol</label>
+        <select class="input" id="ruleProtocol">
+          <option value="TCP">TCP</option>
+          <option value="UDP">UDP</option>
+          <option value="ICMP">ICMP</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Severity</label>
+        <select class="input" id="ruleSeverity">
+          <option value="LOW">Low</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="HIGH">High</option>
+          <option value="CRITICAL">Critical</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost btn-sm" id="ruleModalCancel">Cancel</button>
+        <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save Rule</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/rules.js') }}"></script>
+{% endblock %}

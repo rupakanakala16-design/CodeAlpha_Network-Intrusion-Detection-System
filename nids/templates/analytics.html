@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Threat Analytics{% endblock %}
+{% block page_title %}Threat Analytics{% endblock %}
+{% block page_subtitle %}Patterns across every simulated detection{% endblock %}
+
+{% block content %}
+
+<div class="glass chart-card" style="margin-bottom:18px;">
+  <h4><i class="fa-solid fa-chart-area" style="color:var(--signal); margin-right:8px;"></i>Threats Detected Over Time</h4>
+  <p class="sub">Alert volume grouped by day (simulated demo timestamps)</p>
+  <div class="chart-box tall"><canvas id="chartOverTime"></canvas></div>
+</div>
+
+<div class="analytics-grid">
+  <div class="glass chart-card">
+    <h4>Threats by Severity</h4>
+    <p class="sub">Distribution across LOW / MEDIUM / HIGH / CRITICAL</p>
+    <div class="chart-box"><canvas id="chartSeverity"></canvas></div>
+  </div>
+  <div class="glass chart-card">
+    <h4>Threats by Protocol</h4>
+    <p class="sub">Which protocol each alert was raised on</p>
+    <div class="chart-box"><canvas id="chartProtocol"></canvas></div>
+  </div>
+  <div class="glass chart-card">
+    <h4>Top Simulated Source IPs</h4>
+    <p class="sub">Demo sources most frequently associated with alerts</p>
+    <div class="chart-box"><canvas id="chartTopSources"></canvas></div>
+  </div>
+  <div class="glass chart-card">
+    <h4>Alert Status Distribution</h4>
+    <p class="sub">Active vs. resolved alerts</p>
+    <div class="chart-box"><canvas id="chartStatus"></canvas></div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+{% endblock %}

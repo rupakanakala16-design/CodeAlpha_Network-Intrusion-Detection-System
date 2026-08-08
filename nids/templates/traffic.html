@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Network Traffic{% endblock %}
+{% block page_title %}Network Traffic{% endblock %}
+{% block page_subtitle %}Simulated packet-level traffic captured by the demo engine{% endblock %}
+
+{% block content %}
+
+<div class="glass section-card">
+  <div class="section-head">
+    <div>
+      <h3>Traffic Log</h3>
+      <p>Search, filter, and inspect simulated packets in real time</p>
+    </div>
+    <button class="btn btn-ghost btn-sm" id="refreshBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
+  </div>
+
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" class="input" id="searchInput" placeholder="Search by source or destination IP...">
+    </div>
+    <select class="input" id="protocolFilter">
+      <option value="all">All Protocols</option>
+      <option value="TCP">TCP</option>
+      <option value="UDP">UDP</option>
+      <option value="ICMP">ICMP</option>
+    </select>
+    <select class="input" id="statusFilter">
+      <option value="all">All Statuses</option>
+      <option value="Normal">Normal</option>
+      <option value="Suspicious">Suspicious</option>
+      <option value="Blocked">Blocked</option>
+    </select>
+  </div>
+
+  <div class="table-wrap">
+    <table class="nids-table">
+      <thead>
+        <tr>
+          <th>Timestamp</th><th>Source IP</th><th>Destination IP</th><th>Protocol</th>
+          <th>Src Port</th><th>Dst Port</th><th>Packet Size</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="trafficBody">
+        <tr><td colspan="8"><div class="skeleton" style="height:18px;"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/traffic.js') }}"></script>
+{% endblock %}

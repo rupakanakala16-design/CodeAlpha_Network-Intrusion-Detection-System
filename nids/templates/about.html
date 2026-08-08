@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block page_title %}About This Project{% endblock %}
+{% block page_subtitle %}Network Intrusion Detection System — educational build{% endblock %}
+
+{% block content %}
+
+<div class="glass section-card">
+  <div class="about-hero">
+    <div class="badge-line">
+      <span class="badge info"><i class="fa-solid fa-graduation-cap"></i> Educational Project</span>
+      <span class="badge low"><i class="fa-solid fa-shield"></i> Simulated Data Only</span>
+    </div>
+    <h2>Network Intrusion Detection System</h2>
+    <p>
+      A full-stack demonstration of how a rule-based NIDS monitors traffic, flags suspicious
+      patterns, and visualizes threats — built for classroom and portfolio use with a completely
+      safe, self-contained simulated traffic engine.
+    </p>
+  </div>
+</div>
+
+<div class="glass section-card">
+  <div class="section-head"><div><h3>Objective</h3></div></div>
+  <p style="color:var(--text-1); font-size:13.5px; line-height:1.7;">
+    Monitor network traffic and identify suspicious activity using configurable detection rules,
+    then surface that activity through alerts, analytics, and logs — the same workflow a real
+    security operations dashboard follows, minus any real scanning or attack traffic.
+  </p>
+</div>
+
+<div class="glass section-card">
+  <div class="section-head"><div><h3>Features</h3></div></div>
+  <div class="feature-list">
+    <div class="feature-item glass"><i class="fa-solid fa-network-wired"></i><div><h5>Network traffic monitoring</h5><p>Live simulated packet feed with search and filters.</p></div></div>
+    <div class="feature-item glass"><i class="fa-solid fa-list-check"></i><div><h5>Rule-based detection</h5><p>Enable, edit, and author your own safe detection rules.</p></div></div>
+    <div class="feature-item glass"><i class="fa-solid fa-triangle-exclamation"></i><div><h5>Security alerts</h5><p>Investigate, filter, and resolve generated alerts.</p></div></div>
+    <div class="feature-item glass"><i class="fa-solid fa-chart-line"></i><div><h5>Threat analytics</h5><p>Five Chart.js visualizations of alert patterns.</p></div></div>
+    <div class="feature-item glass"><i class="fa-solid fa-terminal"></i><div><h5>System logs</h5><p>Full audit trail of engine and analyst actions.</p></div></div>
+    <div class="feature-item glass"><i class="fa-solid fa-gauge-high"></i><div><h5>Live dashboard</h5><p>3D radar visualization and real-time stat counters.</p></div></div>
+  </div>
+</div>
+
+<div class="glass section-card">
+  <div class="section-head"><div><h3>Technology</h3></div></div>
+  <div class="tech-grid">
+    <div class="tech-chip glass"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
+    <div class="tech-chip glass"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
+    <div class="tech-chip glass"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
+    <div class="tech-chip glass"><i class="fa-brands fa-bootstrap"></i><span>Bootstrap 5</span></div>
+    <div class="tech-chip glass"><i class="fa-solid fa-chart-simple"></i><span>Chart.js</span></div>
+    <div class="tech-chip glass"><i class="fa-brands fa-python"></i><span>Python Flask</span></div>
+    <div class="tech-chip glass"><i class="fa-solid fa-database"></i><span>SQLite</span></div>
+    <div class="tech-chip glass"><i class="fa-solid fa-shield-halved"></i><span>Snort / Suricata layer</span></div>
+  </div>
+</div>
+
+<div class="glass section-card">
+  <div class="section-head"><div><h3>Safe-Use Note</h3></div></div>
+  <p style="color:var(--text-1); font-size:13.5px; line-height:1.7;">
+    This project ships with a self-contained simulated traffic generator so it works fully offline
+    with no special privileges. It never scans, exploits, or attacks real systems. The optional
+    Snort/Suricata integration point in <span class="mono">ids/detector.py</span> is provided only
+    as a documented extension for readers who already run their own IDS sensor.
+  </p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block page_title %}Settings{% endblock %}
+{% block page_subtitle %}Preferences for this demo console{% endblock %}
+
+{% block content %}
+
+<div class="glass section-card">
+  <div class="section-head">
+    <div>
+      <h3>Monitoring</h3>
+      <p>Controls for the simulated detection engine</p>
+    </div>
+  </div>
+
+  <div class="settings-row">
+    <div>
+      <h5>Live simulation</h5>
+      <p>Generate a new batch of simulated traffic every 5 seconds on the dashboard.</p>
+    </div>
+    <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
+  </div>
+
+  <div class="settings-row">
+    <div>
+      <h5>Desktop-style alert badges</h5>
+      <p>Show colored severity badges throughout the console (LOW / MEDIUM / HIGH / CRITICAL).</p>
+    </div>
+    <label class="switch"><input type="checkbox" checked disabled><span class="slider"></span></label>
+  </div>
+
+  <div class="settings-row">
+    <div>
+      <h5>Auto-refresh interval</h5>
+      <p>How often traffic, alert, and log tables poll the backend.</p>
+    </div>
+    <select class="input" style="width:140px;">
+      <option>5 seconds</option>
+      <option selected>8 seconds</option>
+      <option>15 seconds</option>
+      <option>30 seconds</option>
+    </select>
+  </div>
+</div>
+
+<div class="glass section-card">
+  <div class="section-head">
+    <div>
+      <h3>Integration Layer</h3>
+      <p>Connect a real IDS engine instead of the built-in simulator</p>
+    </div>
+  </div>
+  <div class="settings-row">
+    <div>
+      <h5>Snort / Suricata EVE JSON path</h5>
+      <p>Optional — point the detector at a real IDS event log instead of simulated data. See README for setup.</p>
+    </div>
+    <input type="text" class="input" style="width:260px;" placeholder="/var/log/suricata/eve.json" disabled>
+  </div>
+  <div class="settings-row">
+    <div>
+      <h5>Data source mode</h5>
+      <p>This demo build always runs in Simulated mode for safety.</p>
+    </div>
+    <select class="input" style="width:180px;" disabled>
+      <option selected>Simulated (Safe Demo)</option>
+      <option>Snort / Suricata (Advanced)</option>
+    </select>
+  </div>
+</div>
+
+<div class="glass section-card">
+  <div class="section-head">
+    <div>
+      <h3>Danger Zone</h3>
+      <p>Irreversible actions</p>
+    </div>
+  </div>
+  <div class="settings-row">
+    <div>
+      <h5>Clear system logs</h5>
+      <p>Remove every log entry from the database.</p>
+    </div>
+    <a href="{{ url_for('logs_page') }}" class="btn btn-danger btn-sm"><i class="fa-solid fa-broom"></i> Go to Logs</a>
+  </div>
+</div>
+
+{% endblock %}

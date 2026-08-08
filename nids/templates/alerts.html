@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Security Alerts{% endblock %}
+{% block page_title %}Security Alerts{% endblock %}
+{% block page_subtitle %}Every threat identified by the detection engine{% endblock %}
+
+{% block content %}
+
+<div class="glass section-card">
+  <div class="section-head">
+    <div>
+      <h3>Alert Feed</h3>
+      <p>Filter by severity or date, then investigate or resolve</p>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" class="input" id="searchInput" placeholder="Search by IP or alert type...">
+    </div>
+    <select class="input" id="severityFilter">
+      <option value="all">All Severities</option>
+      <option value="LOW">Low</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="HIGH">High</option>
+      <option value="CRITICAL">Critical</option>
+    </select>
+    <select class="input" id="dateFilter">
+      <option value="all">All Dates</option>
+      <option value="today">Today</option>
+    </select>
+  </div>
+
+  <div class="table-wrap">
+    <table class="nids-table">
+      <thead>
+        <tr>
+          <th>Time</th><th>Source IP</th><th>Destination IP</th><th>Protocol</th>
+          <th>Alert Type</th><th>Severity</th><th>Status</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="alertsBody">
+        <tr><td colspan="8"><div class="skeleton" style="height:18px;"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Alert detail modal -->
+<div class="modal-overlay" id="alertModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 id="modalTitle">Alert Details</h3>
+      <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div id="modalBody" style="font-size:13px; color:var(--text-1); line-height:1.8;"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost btn-sm" id="modalCloseBtn">Close</button>
+      <button class="btn btn-primary btn-sm" id="modalResolveBtn"><i class="fa-solid fa-check"></i> Mark as Resolved</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/alerts.js') }}"></script>
+{% endblock %}
